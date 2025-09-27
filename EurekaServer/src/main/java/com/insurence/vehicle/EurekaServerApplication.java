@@ -16,6 +16,7 @@ public class EurekaServerApplication {
 		SpringApplication.run(EurekaServerApplication.class, args);
 		
 		logger.error("Spring application started.");
+		logger.error("New Message is created");
 	}
 
 }
