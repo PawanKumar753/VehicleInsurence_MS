@@ -1,0 +1,28 @@
+# Eclipse workspace
+.metadata/
+*.log
+*.tmp
+*.bak
+
+# Maven
+target/
+*.class
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# SonarLint
+.sonarlint/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Docker
+docker/es_data/
+
