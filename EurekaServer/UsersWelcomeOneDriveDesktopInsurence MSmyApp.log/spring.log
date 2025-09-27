@@ -1,0 +1,47 @@
+2025-09-26T15:44:55.037+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.i.vehicle.EurekaServerApplication      : Starting EurekaServerApplication using Java 21.0.6 with PID 26140 (C:\Users\Welcome\OneDrive\Desktop\Insurence MS\EurekaServer\target\classes started by Welcome in C:\Users\Welcome\OneDrive\Desktop\Insurence MS\EurekaServer)
+2025-09-26T15:44:55.042+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.i.vehicle.EurekaServerApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-09-26T15:44:55.157+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-26T15:44:55.158+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-26T15:44:57.171+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=b1e5463b-13bf-30b2-87d8-6f5018282c19
+2025-09-26T15:44:57.815+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8761 (http)
+2025-09-26T15:44:57.840+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-26T15:44:57.841+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-09-26T15:44:57.911+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-26T15:44:57.912+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2751 ms
+2025-09-26T15:44:59.153+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2025-09-26T15:44:59.155+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2025-09-26T15:44:59.390+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2025-09-26T15:44:59.390+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2025-09-26T15:44:59.622+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-09-26T15:45:00.559+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-26T15:45:00.655+05:30  WARN 26140 --- [Eureka-Server] [restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-09-26T15:45:00.690+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2025-09-26T15:45:00.740+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2025-09-26T15:45:00.740+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] com.netflix.discovery.DiscoveryClient    : Client configured to neither register nor query for data.
+2025-09-26T15:45:00.743+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1758881700742 with initial instances count: 0
+2025-09-26T15:45:00.814+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.eureka.DefaultEurekaServerContext    : Initializing ...
+2025-09-26T15:45:00.818+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.eureka.cluster.PeerEurekaNodes       : Adding new peer nodes [http://localhost:8761/eureka/]
+2025-09-26T15:45:01.014+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2025-09-26T15:45:01.015+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2025-09-26T15:45:01.015+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2025-09-26T15:45:01.015+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2025-09-26T15:45:01.058+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.eureka.cluster.PeerEurekaNodes       : Replica node URL:  http://localhost:8761/eureka/
+2025-09-26T15:45:01.072+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.e.registry.AbstractInstanceRegistry  : Finished initializing remote region registries. All known remote regions: []
+2025-09-26T15:45:01.073+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.n.eureka.DefaultEurekaServerContext    : Initialized
+2025-09-26T15:45:01.091+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-09-26T15:45:01.176+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application EUREKA-SERVER with eureka with status UP
+2025-09-26T15:45:01.193+05:30  INFO 26140 --- [Eureka-Server] [Thread-15] o.s.c.n.e.server.EurekaServerBootstrap   : isAws returned false
+2025-09-26T15:45:01.194+05:30  INFO 26140 --- [Eureka-Server] [Thread-15] o.s.c.n.e.server.EurekaServerBootstrap   : Initialized server context
+2025-09-26T15:45:01.195+05:30  INFO 26140 --- [Eureka-Server] [Thread-15] c.n.e.r.PeerAwareInstanceRegistryImpl    : Got 1 instances from neighboring DS node
+2025-09-26T15:45:01.195+05:30  INFO 26140 --- [Eureka-Server] [Thread-15] c.n.e.r.PeerAwareInstanceRegistryImpl    : Renew threshold is: 1
+2025-09-26T15:45:01.195+05:30  INFO 26140 --- [Eureka-Server] [Thread-15] c.n.e.r.PeerAwareInstanceRegistryImpl    : Changing status to UP
+2025-09-26T15:45:01.199+05:30  INFO 26140 --- [Eureka-Server] [Thread-15] e.s.EurekaServerInitializerConfiguration : Started Eureka Server
+2025-09-26T15:45:01.210+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8761 (http) with context path '/'
+2025-09-26T15:45:01.212+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8761
+2025-09-26T15:45:01.234+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.i.vehicle.EurekaServerApplication      : Started EurekaServerApplication in 6.883 seconds (process running for 7.701)
+2025-09-26T15:45:01.337+05:30  INFO 26140 --- [Eureka-Server] [restartedMain] c.i.vehicle.EurekaServerApplication      : Spring application started.
+2025-09-26T15:46:01.197+05:30  INFO 26140 --- [Eureka-Server] [Eureka-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2025-09-26T15:46:40.603+05:30  INFO 26140 --- [Eureka-Server] [http-nio-8761-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-26T15:46:40.606+05:30  INFO 26140 --- [Eureka-Server] [http-nio-8761-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-26T15:46:40.611+05:30  INFO 26140 --- [Eureka-Server] [http-nio-8761-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2025-09-26T15:47:01.200+05:30  INFO 26140 --- [Eureka-Server] [Eureka-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 3ms

@@ -1,0 +1,17 @@
+spring.application.name=Eureka-Server
+
+server.port=8761
+
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+
+
+#Directly specify the full log file
+logging.file.name=C:/Users/Welcome/OneDrive/Desktop/Insurence MS/myApp.log
+
+
+# Disable all default logs
+logging.level.root=OFF
+
+# Enable only your package
+logging.level.com.insurence.vehicle=INFO

@@ -1,0 +1,17 @@
+spring.application.name=Eureka-Server
+
+server.port=8761
+
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+
+
+#Logging file path
+#logging.file.name==C:\Users\Welcome\OneDrive\Desktop\Insurence MS\myApp.log
+
+
+# Log to specific file
+logging.file.name=C:\Users\Welcome\Desktop\InsurenceMS\myApp.log
+
+# Optional: log level
+logging.level.root=INFO
