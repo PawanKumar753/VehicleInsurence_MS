@@ -27,12 +27,10 @@ pipeline {
 
        stage('Build Docker Image') {
             steps {
-                dir('EurekaServer') {
-                    bat 'docker build -t eurekaserver:latest -f Dockerfile .'
-                }
+                bat 'docker build -t eurekaserver:latest -f "C:/ProgramData/Jenkins/.jenkins/workspace/SpringBoot-Build2/EurekaServer/Dockerfile" "C:/ProgramData/Jenkins/.jenkins/workspace/SpringBoot-Build2/EurekaServer"'
             }
         }
- 
+
 
 
         stage('Run Docker Container') {
