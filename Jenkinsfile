@@ -2,52 +2,47 @@ pipeline {
     agent any
 
     environment {
-        SERVICES = ['EurekaServer']
+        // You can define single service here; later, you can change to a list inside script
+        SERVICE = "EurekaServer"
     }
 
     stages {
+
         stage('Checkout') {
             steps {
-                git branch: 'master', 
-                    url: 'https://github.com/PawanKumar753/VehicleInsurence_MS.git', 
+                echo "Checking out code..."
+                git branch: 'master',
+                    url: 'https://github.com/PawanKumar753/VehicleInsurence_MS.git',
                     credentialsId: 'springboot-jenkins4'
             }
         }
 
-        stage('Build JARs') {
+        stage('Build JAR') {
+            steps {
+                echo "Building JAR for ${env.SERVICE}..."
+                bat "mvn -f %WORKSPACE%\\${env.SERVICE}\\pom.xml clean package -DskipTests"
+            }
+        }
+
+        stage('Build Docker Image') {
             steps {
                 script {
-                    SERVICES.each { service ->
-                        echo "Building JAR for ${service}..."
-                        bat "mvn -f ${service}/pom.xml clean package -DskipTests"
-                    }
+                    def imageName = env.SERVICE.toLowerCase() + ":latest"
+                    echo "Building Docker image: ${imageName}..."
+                    bat "docker build -t ${imageName} -f \"%WORKSPACE%\\${env.SERVICE}\\Dockerfile\" \"%WORKSPACE%\\${env.SERVICE}\""
                 }
             }
         }
 
-        stage('Build Docker Images') {
+        stage('Run Docker Container') {
             steps {
                 script {
-                    SERVICES.each { service ->
-                        def imageName = service.toLowerCase() + ":latest"
-                        echo "Building Docker image for ${service} as ${imageName}..."
-                        bat "docker build -t ${imageName} -f \"%WORKSPACE%\\${service}\\Dockerfile\" \"%WORKSPACE%\\${service}\""
-                    }
-                }
-            }
-        }
+                    def containerName = env.SERVICE.toLowerCase()
+                    echo "Stopping existing container if exists..."
+                    bat "docker rm -f ${containerName} || echo Container not found"
 
-        stage('Run Docker Containers') {
-            steps {
-                script {
-                    SERVICES.each { service ->
-                        def imageName = service.toLowerCase() + ":latest"
-                        echo "Running Docker container for ${service}..."
-                        // Stop existing container if it exists
-                        bat "docker rm -f ${service.toLowerCase()} || echo Container not found"
-                        // Run new container
-                        bat "docker run -d -p 8761:8761 --name ${service.toLowerCase()} ${imageName}"
-                    }
+                    echo "Running container: ${containerName}..."
+                    bat "docker run -d -p 8761:8761 --name ${containerName} ${env.SERVICE.toLowerCase()}:latest"
                 }
             }
         }
@@ -55,10 +50,10 @@ pipeline {
 
     post {
         success {
-            echo 'All services deployed successfully!'
+            echo "${env.SERVICE} deployed successfully!"
         }
         failure {
-            echo 'Deployment failed!'
+            echo "Deployment failed for ${env.SERVICE}!"
         }
     }
 }
