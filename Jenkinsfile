@@ -21,23 +21,23 @@ pipeline {
 
         stage('Build JAR') {
             steps {
-                sh 'mvn -f EurekaServer/pom.xml clean package -DskipTests'
+                bat 'mvn -f EurekaServer/pom.xml clean package -DskipTests'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 // Remove old container if exists
-                sh "docker rm -f ${SERVICE_NAME} || true"
+                bat "docker rm -f ${SERVICE_NAME} || true"
                 // Build Docker image
-                sh "docker build -t ${SERVICE_NAME}:latest EurekaServer/"
+                bat "docker build -t ${SERVICE_NAME}:latest EurekaServer/"
             }
         }
 
         stage('Run Docker Container') {
             steps {
                 // Run the container
-                sh """
+                bat """
                 docker run -d -p 8761:8761 \
                 --name ${SERVICE_NAME} \
                 ${SERVICE_NAME}:latest
@@ -48,7 +48,7 @@ pipeline {
 
     post {
         always {
-            echo "EurekaServer deployment finished!"
+            echo "EurekaServer deployment finibated!"
         }
     }
 }
