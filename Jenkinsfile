@@ -1,53 +1,64 @@
- 
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven-3.9'  // Jenkins Maven tool name
-        jdk 'Java17'           // Jenkins JDK tool name
-    }
-
     environment {
-        SERVICE_NAME = "eurekaserver"
+        SERVICES = ['EurekaServer']
     }
 
     stages {
-
         stage('Checkout') {
             steps {
-                git 'https://github.com/PawanKumar753/VehicleInsurence_MS.git'
+                git branch: 'master', 
+                    url: 'https://github.com/PawanKumar753/VehicleInsurence_MS.git', 
+                    credentialsId: 'springboot-jenkins4'
             }
         }
 
-        stage('Build JAR') {
+        stage('Build JARs') {
             steps {
-                bat 'mvn -f EurekaServer/pom.xml clean package -DskipTests'
+                script {
+                    SERVICES.each { service ->
+                        echo "Building JAR for ${service}..."
+                        bat "mvn -f ${service}/pom.xml clean package -DskipTests"
+                    }
+                }
             }
         }
 
-       stage('Build Docker Image') {
+        stage('Build Docker Images') {
             steps {
-                bat 'docker build -t eurekaserver:latest -f "C:/ProgramData/Jenkins/.jenkins/workspace/SpringBoot-Build2/EurekaServer/Dockerfile" "C:/ProgramData/Jenkins/.jenkins/workspace/SpringBoot-Build2/EurekaServer"'
+                script {
+                    SERVICES.each { service ->
+                        def imageName = service.toLowerCase() + ":latest"
+                        echo "Building Docker image for ${service} as ${imageName}..."
+                        bat "docker build -t ${imageName} -f \"%WORKSPACE%\\${service}\\Dockerfile\" \"%WORKSPACE%\\${service}\""
+                    }
+                }
             }
         }
 
-
-
-        stage('Run Docker Container') {
+        stage('Run Docker Containers') {
             steps {
-                // Run the container
-                bat """
-                docker run -d -p 8761:8761 \
-                --name ${SERVICE_NAME} \
-                ${SERVICE_NAME}:latest
-                """
+                script {
+                    SERVICES.each { service ->
+                        def imageName = service.toLowerCase() + ":latest"
+                        echo "Running Docker container for ${service}..."
+                        // Stop existing container if it exists
+                        bat "docker rm -f ${service.toLowerCase()} || echo Container not found"
+                        // Run new container
+                        bat "docker run -d -p 8761:8761 --name ${service.toLowerCase()} ${imageName}"
+                    }
+                }
             }
         }
     }
 
     post {
-        always {
-            echo "EurekaServer deployment finibated!"
+        success {
+            echo 'All services deployed successfully!'
+        }
+        failure {
+            echo 'Deployment failed!'
         }
     }
 }
