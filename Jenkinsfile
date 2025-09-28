@@ -25,13 +25,14 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+       stage('Build Docker Image') {
             steps {
-                dir('EurekaServer') { // change working directory to EurekaServer
-                    bat 'docker build -t eurekaserver:latest .'
+                dir('EurekaServer') {
+                    bat 'docker build -t eurekaserver:latest -f Dockerfile .'
                 }
             }
-        }       
+        }
+ 
 
 
         stage('Run Docker Container') {
