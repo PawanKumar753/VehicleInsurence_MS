@@ -24,15 +24,19 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+      stage('Build Docker Image') {
             steps {
                 script {
                     def imageName = env.SERVICE.toLowerCase() + ":latest"
                     echo "Building Docker image: ${imageName}..."
-                    bat "docker build -t ${imageName} -f \"%WORKSPACE%\\${env.SERVICE}\\Dockerfile\" \"%WORKSPACE%\\${env.SERVICE}\""
+                    bat """
+                        cd "%WORKSPACE%\\${env.SERVICE}"
+                        docker build -t ${imageName} .
+                    """
                 }
             }
         }
+
 
         stage('Run Docker Container') {
             steps {
