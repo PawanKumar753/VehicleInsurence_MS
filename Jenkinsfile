@@ -1,9 +1,13 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'maven:3.9.3-eclipse-temurin-17' // Maven + JDK 17
+            args '-v /var/run/docker.sock:/var/run/docker.sock' // to run Docker inside Docker
+        }
+    }
 
     environment {
-        // You can define single service here; later, you can change to a list inside script
-        SERVICE = "EurekaServer"
+        SERVICE = 'EurekaServer'
     }
 
     stages {
@@ -20,33 +24,31 @@ pipeline {
         stage('Build JAR') {
             steps {
                 echo "Building JAR for ${env.SERVICE}..."
-                bat "mvn -f %WORKSPACE%\\${env.SERVICE}\\pom.xml clean package -DskipTests"
+                sh "mvn -f ${env.SERVICE}/pom.xml clean package -DskipTests"
             }
         }
 
-      stage('Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 script {
                     def imageName = env.SERVICE.toLowerCase() + ":latest"
                     echo "Building Docker image: ${imageName}..."
-                    bat """
-                        cd "%WORKSPACE%\\${env.SERVICE}"
-                        docker build -t ${imageName} .
+                    sh """
+                    docker build -t ${imageName} -f ${env.SERVICE}/Dockerfile ${env.SERVICE}
                     """
                 }
             }
         }
-
 
         stage('Run Docker Container') {
             steps {
                 script {
                     def containerName = env.SERVICE.toLowerCase()
                     echo "Stopping existing container if exists..."
-                    bat "docker rm -f ${containerName} || echo Container not found"
+                    sh "docker rm -f ${containerName} || true"
 
                     echo "Running container: ${containerName}..."
-                    bat "docker run -d -p 8761:8761 --name ${containerName} ${env.SERVICE.toLowerCase()}:latest"
+                    sh "docker run -d -p 8761:8761 --name ${containerName} ${env.SERVICE.toLowerCase()}:latest"
                 }
             }
         }
