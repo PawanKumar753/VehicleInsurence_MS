@@ -27,12 +27,12 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                // Remove old container if exists
-                bat "docker rm -f ${SERVICE_NAME} || true"
-                // Build Docker image
-                bat "docker build -t ${SERVICE_NAME}:latest EurekaServer/"
+                dir('EurekaServer') { // change working directory to EurekaServer
+                    bat 'docker build -t eurekaserver:latest .'
+                }
             }
-        }
+        }       
+
 
         stage('Run Docker Container') {
             steps {
