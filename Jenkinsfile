@@ -2,50 +2,54 @@ pipeline {
     agent any
 
     environment {
-        SERVICE = "EurekaServer"
+        DOCKER_IMAGE = "eurekaserver:latest"
+        APP_NAME = "EurekaServer"
+        WORKSPACE_DIR = "${env.WORKSPACE}\\EurekaServer"
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
                 echo "Checking out code..."
-                git branch: 'master',
-                    url: 'https://github.com/PawanKumar753/VehicleInsurence_MS.git',
-                    credentialsId: 'springboot-jenkins4'
+                git url: 'https://github.com/PawanKumar753/VehicleInsurence_MS.git', branch: 'master', credentialsId: 'springboot-jenkins4'
             }
         }
 
         stage('Build JAR') {
             steps {
-                echo "Building JAR for ${env.SERVICE}..."
-                bat "mvn -f %WORKSPACE%\\${env.SERVICE}\\pom.xml clean package -DskipTests"
+                echo "Building JAR for ${APP_NAME}..."
+                bat "mvn -f ${WORKSPACE_DIR}\\pom.xml clean package -DskipTests"
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                echo "Building Docker image for ${env.SERVICE}..."
-                bat "docker build -t ${env.SERVICE.toLowerCase()}:latest %WORKSPACE%\\${env.SERVICE}"
+                echo "Building Docker image: ${DOCKER_IMAGE}..."
+                dir(WORKSPACE_DIR) {
+                    // Ensure Dockerfile exists
+                    bat "docker build -t ${DOCKER_IMAGE} ."
+                }
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                echo "Stopping existing container if exists..."
-                bat "docker rm -f ${env.SERVICE.toLowerCase()} || echo Container not found"
-
-                echo "Running container..."
-                bat "docker run -d -p 8761:8761 --name ${env.SERVICE.toLowerCase()} ${env.SERVICE.toLowerCase()}:latest"
+                echo "Running Docker container for ${APP_NAME}..."
+                bat """
+                    docker stop ${APP_NAME} || exit 0
+                    docker rm ${APP_NAME} || exit 0
+                    docker run -d --name ${APP_NAME} -p 8761:8761 ${DOCKER_IMAGE}
+                """
             }
         }
     }
 
     post {
         success {
-            echo "${env.SERVICE} deployed successfully!"
+            echo "${APP_NAME} deployed successfully!"
         }
         failure {
-            echo "Deployment failed for ${env.SERVICE}!"
+            echo "Deployment failed for ${APP_NAME}!"
         }
     }
 }
