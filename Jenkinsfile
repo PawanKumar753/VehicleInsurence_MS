@@ -33,16 +33,17 @@ pipeline {
             }
         }
 
-        stage('Run Docker Container') {
+       stage('Run Docker Container') {
             steps {
-                echo "Running Docker container for ${APP_NAME}..."
-                bat """
-                    docker stop ${APP_NAME} || exit 0
-                    docker rm ${APP_NAME} || exit 0
-                    docker run -d --name ${APP_NAME} -p 8761:8761 ${DOCKER_IMAGE}
-                """
+                echo "Running Docker container for EurekaServer..."
+                bat '''
+                    docker stop EurekaServer || exit 0
+                    docker rm EurekaServer || exit 0
+                    docker run -d -p 8761:8761 --name EurekaServer eurekaserver:latest
+                '''
             }
         }
+
         stage('Run Eureka Container') {
             steps {
                 echo "Running Docker container for EurekaServer..."
