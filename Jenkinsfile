@@ -43,7 +43,7 @@ pipeline {
                 """
             }
         }
-        stage('Run Docker Container') {
+        stage('Run Eureka Container') {
             steps {
                 echo "Running Docker container for EurekaServer..."
                 bat '''
