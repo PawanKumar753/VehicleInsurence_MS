@@ -10,7 +10,8 @@ services:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
     volumes:
-      - ./docker/es_data:/usr/share/elasticsearch/data
+      # - ./docker/es_data:/usr/share/elasticsearch/data
+      - es_data:/usr/share/elasticsearch/data
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.17.0
