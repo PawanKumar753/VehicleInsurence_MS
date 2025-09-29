@@ -33,27 +33,18 @@ pipeline {
             }
         }
 
-       stage('Run Docker Container') {
+      stage('Run Docker Container') {
             steps {
-                echo "Running Docker container for EurekaServer..."
-                bat '''
-                    docker stop EurekaServer || exit 0
-                    docker rm EurekaServer || exit 0
-                    docker run -d -p 8761:8761 --name EurekaServer eurekaserver:latest
-                '''
+                echo "Running Docker container for ${APP_NAME}..."
+                bat """
+                    docker stop ${APP_NAME} || exit 0
+                    docker rm ${APP_NAME} || exit 0
+                    docker run -d -p 8761:8761 --name ${APP_NAME} ${DOCKER_IMAGE}
+                """
             }
         }
 
-        stage('Run Eureka Container') {
-            steps {
-                echo "Running Docker container for EurekaServer..."
-                bat '''
-                    docker stop EurekaServer || exit 0
-                    docker rm EurekaServer || exit 0
-                    docker run -d -p 8761:8761 --name EurekaServer eurekaserver:latest
-                '''
-            }
-        }
+
 
     }
 
