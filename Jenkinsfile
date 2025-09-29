@@ -26,6 +26,7 @@ pipeline {
             steps {
                 echo "Building Docker image: ${DOCKER_IMAGE}..."
                 dir(WORKSPACE_DIR) {
+                    bat "dir"
                     // Ensure Dockerfile exists
                     bat "docker build -t ${DOCKER_IMAGE} ."
                 }
