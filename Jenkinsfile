@@ -22,6 +22,16 @@ pipeline {
             }
         }
 
+        stage('Check Environment') {
+            steps {
+                bat "echo Jenkins Home: %JENKINS_HOME%"
+                bat "whoami"
+                bat "docker --version"
+                bat "docker ps"
+            }
+        }
+
+
         stage('Build Docker Image') {
             steps {
                 echo "Building Docker image: ${DOCKER_IMAGE}..."
