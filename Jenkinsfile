@@ -46,13 +46,12 @@ pipeline {
       stage('Run Docker Container') {
             steps {
                 echo "Running Docker container for ${APP_NAME}..."
-                bat """
-                    docker stop ${APP_NAME} || exit 0
-                    docker rm ${APP_NAME} || exit 0
-                    docker run -d -p 8761:8761 --name ${APP_NAME} ${DOCKER_IMAGE}
-                """
+                bat "docker stop ${APP_NAME} || exit 0"
+                bat "docker rm ${APP_NAME} || exit 0"
+                bat "docker run -d -p 8761:8761 --name ${APP_NAME} ${DOCKER_IMAGE}"
             }
         }
+
 
 
 
