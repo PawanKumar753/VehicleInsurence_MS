@@ -43,7 +43,8 @@ services:
       - ./springboot_logs:/var/log/springboot:ro
     depends_on:
       - logstash
-    command: filebeat -e -strict.perms=false
+    command: sh -c "sleep 15 && filebeat -e -strict.perms=false"
+    restart: unless-stopped
 
 volumes:
   es_data:
