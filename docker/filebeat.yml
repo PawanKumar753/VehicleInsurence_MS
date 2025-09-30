@@ -2,7 +2,7 @@ filebeat.inputs:
   - type: log
     enabled: true
     paths:
-      - /var/log/springboot/*.log
+      - /logs/*.log   # <-- updated path
 
     # Handle Spring Boot stack traces (multi-line)
     multiline.pattern: '^\d{4}-\d{2}-\d{2}'
